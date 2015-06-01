@@ -2,6 +2,10 @@
  * Created by Korhan on 29/05/2015.
  */
 import scala.collection.mutable.HashSet
+/*
+ * @author  Korhan Ozturk
+ * Each method in this class is meant to answer a corresponding problem in http://projecteuler.net.
+ */
 object EulerProblems {
 
   def sumOfAllFiveOrThree(limit : Int) : Int = {
@@ -17,7 +21,12 @@ object EulerProblems {
 
     println(fibList filter(a=> a<4000000 && a%2==0) sum)
 
-    println("max prime factor: " + findLargestPrimeFactor2(BigInt(600851475143L)))
+    println("max prime factor: " + findLargestPrimeFactor(BigInt(600851475143L)))
+
+    println("GCD 252 and 105: " + GCD(252, 105))
+
+    val numbers = List.range(1,21)
+    println("LCDM 1-20: " + LCM(numbers))
   }
 
   var fibList = List[BigInt]()
@@ -29,22 +38,9 @@ object EulerProblems {
         fibEven(x-1, next, (next + prev))
   }
 
-  def findLargestPrimeFactor(input: BigInt) : Int ={
-    var copyInp = input
-    var primeNumbers = HashSet[Int]()
-    var x = 2
-    while(x <= input/2){
-      if(copyInp%x==0){
-        primeNumbers += x
-        copyInp/=x
-        x-=1
-      }
-      x+=1
-    }
-    primeNumbers max
-  }
 
-  def findLargestPrimeFactor2(input: BigInt) : Int ={
+  //Finds the largest prime factor of a given number
+  def findLargestPrimeFactor(input: BigInt) : Int ={
     var copyInp = input
     var primeNumbers = HashSet[Int]()
     var x = 2
@@ -62,6 +58,28 @@ object EulerProblems {
       }
     }
     primeNumbers max
+  }
+
+  //Finds the greatest common divisor of two numbers
+  def GCD(a: Int, b: Int): Int = b match {
+    case 0 => a
+    case _ => GCD(b, a%b)
+
+  }
+
+  //Finds the least common multiple of two numbers
+  def findLCM(a: Int, b:Int): Int = {
+    a * b / GCD(a, b)
+  }
+
+  //Finds the least common multiple that is evenly divisible by all of the numbers in the list
+  def LCM(numbers: List[Int]) : Int = {
+    var result = numbers head
+
+    for (i <- 1 until numbers.length - 1){
+      result = findLCM(result, numbers(i))
+    }
+    result
   }
 
 }
