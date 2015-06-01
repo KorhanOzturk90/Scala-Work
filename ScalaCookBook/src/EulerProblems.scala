@@ -25,8 +25,11 @@ object EulerProblems {
 
     println("GCD 252 and 105: " + GCD(252, 105))
 
-    val numbers = List.range(1,21)
+    var numbers = List.range(1,21)
     println("LCDM 1-20: " + LCM(numbers))
+
+    numbers = List.range(1,101)
+    println("Sum square difference of 1-100: " + sumSquareDiff(numbers))
   }
 
   var fibList = List[BigInt]()
@@ -80,6 +83,18 @@ object EulerProblems {
       result = findLCM(result, numbers(i))
     }
     result
+  }
+
+  //Finds the difference between the sum of the squares of the first n natural numbers and the square of the sum
+  def sumSquareDiff(input: List[Int]) : Int = {
+    var tempSum = (input sum) - (input head)
+    var totalSum = 0
+
+    for(i<-0 until input.length - 1){
+      totalSum += input(i) * tempSum * 2
+      tempSum -= input(i+1)
+    }
+    totalSum
   }
 
 }
