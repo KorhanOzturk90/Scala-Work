@@ -15,7 +15,7 @@ object EulerProblems {
   }
 
   def main (args: Array[String]) {
-    /*println("sum: " + sumOfAllFiveOrThree(1000))
+    println("sum: " + sumOfAllFiveOrThree(1000))
 
     fibEven(700)
 
@@ -29,9 +29,11 @@ object EulerProblems {
     println("LCDM 1-20: " + LCM(numbers))
 
     numbers = List.range(1,101)
-    println("Sum square difference of 1-100: " + sumSquareDiff(numbers))*/
+    println("Sum square difference of 1-100: " + sumSquareDiff(numbers))
 
     println("largest palindrome : " + findLargestPalindrome())
+
+    println("10001st prime number is " + findNthPrimeNumber(10001))
   }
 
   var fibList = List[BigInt]()
@@ -122,6 +124,35 @@ object EulerProblems {
       }
     }
     result
+  }
+
+  //Finds whether the given number is a prime number
+  def isPrime(input: Int) : Boolean = {
+    var prime = true
+    if(input == 2){
+      prime = true
+    }
+    else
+      for(x<-2 to Math.sqrt(input).toInt ) {
+        if(input % x == 0){
+          prime = false
+        }
+      }
+    prime
+  }
+
+  //Finds n'th prime number
+  def findNthPrimeNumber(n : Int) : Int = {
+    var count = 0
+    for(i<-2 to 400000){
+      if(isPrime(i)){
+        count+= 1
+      }
+      if(count == n) {
+        return i
+      }
+    }
+    0
   }
 
 
