@@ -15,7 +15,7 @@ object EulerProblems {
   }
 
   def main (args: Array[String]) {
-    println("sum: " + sumOfAllFiveOrThree(1000))
+    /*println("sum: " + sumOfAllFiveOrThree(1000))
 
     fibEven(700)
 
@@ -29,7 +29,9 @@ object EulerProblems {
     println("LCDM 1-20: " + LCM(numbers))
 
     numbers = List.range(1,101)
-    println("Sum square difference of 1-100: " + sumSquareDiff(numbers))
+    println("Sum square difference of 1-100: " + sumSquareDiff(numbers))*/
+
+    println("largest palindrome : " + findLargestPalindrome())
   }
 
   var fibList = List[BigInt]()
@@ -96,5 +98,31 @@ object EulerProblems {
     }
     totalSum
   }
+
+  //Finds whether given number is a palindrome.
+  def isPalindrome(number:Int) : Boolean = {
+    var p = number
+    var reverse = 0
+    while(p > 0){
+      reverse *= 10
+      reverse += p%10
+      p /= 10
+
+    }
+    reverse == number
+  }
+
+  //Finds the largest palindrome made from the product of two 3-digit numbers.
+  def findLargestPalindrome() : Int ={
+    var result = 0
+    for(i<-999 to 100 by -1; j <- 100 to i){
+      val mult = i * j
+      if(isPalindrome(mult) && mult > result ){
+        result = mult
+      }
+    }
+    result
+  }
+
 
 }
