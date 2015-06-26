@@ -17,7 +17,8 @@ object EulerProblems {
   }
 
   def main(args: Array[String]) {
-    println("sum: " + sumOfAllFiveOrThree(1000))
+    val sum = sumOfAllFiveOrThree(1000);
+    println(s"sum: $sum")
 
     fibEven(700)
 
